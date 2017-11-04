@@ -1,9 +1,14 @@
 from flask import Flask
 app = Flask(__name__)
-
+document = UploadSet('photos', IMAGES)
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST' and 'document' in request.files:
+        filename = document.save(request.files['document'])
 @app.route('/')
 def hello_world():
   return '''
+
   <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -67,6 +72,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+      ...
+      <input type=file name=photo>
+      ...
+    </form>
     <h2 class="w3-text-light-grey">My Name</h2>
     <hr style="width:200px" class="w3-opacity">
     <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
