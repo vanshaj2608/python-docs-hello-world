@@ -1,8 +1,6 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for
-from werkzeug import secure_filename
 from app import app
-import os
 app = Flask(__name__)
 
 @app.route('/')
