@@ -10,7 +10,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/upload', methods=['POST'])
 def upload():
      return redirect("/")
-
+    '''
     if request.method == 'POST':
         submitted_file = request.files['file']
         if submitted_file :
@@ -18,7 +18,7 @@ def upload():
             submitted_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect("/")
             #return redirect(url_for('uploaded_file', filename=filename))
-
+    '''
 @app.route('/')
 def hello_world():
   return '''
