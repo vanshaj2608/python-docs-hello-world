@@ -1,7 +1,25 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for
+from werkzeug import secure_filename
+import os
 app = Flask(__name__)
+UPLOAD_FOLDER = '/upload'
+ALLOWED_EXTENSIONS = set(['doc', 'docx'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+'''
+@app.route('/upload', methods=['POST'])
+def upload():
+     return redirect("/")
+
+    if request.method == 'POST':
+        submitted_file = request.files['file']
+        if submitted_file :
+            filename = secure_filename(submitted_file.filename)
+            submitted_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect("/")
+            #return redirect(url_for('uploaded_file', filename=filename))
+'''
 @app.route('/')
 def hello_world():
   return '''
