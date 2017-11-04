@@ -9,7 +9,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])
 def upload():
-     return redirect("/")
+     return redirect(url_for("/"))
     '''
     if request.method == 'POST':
         submitted_file = request.files['file']
