@@ -8,11 +8,11 @@ UPLOAD_FOLDER = '/upload'
 ALLOWED_EXTENSIONS = set(['doc', 'docx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+'''
 @app.route('/upload', methods=['POST'])
 def upload():
      return redirect("/")
-'''
+
     if request.method == 'POST':
         submitted_file = request.files['file']
         if submitted_file :
