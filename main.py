@@ -7,7 +7,6 @@ UPLOAD_FOLDER = '/upload'
 ALLOWED_EXTENSIONS = set(['doc', 'docx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-'''
 @app.route('/upload', methods=['POST'])
 def upload():
      return redirect("/")
@@ -19,7 +18,7 @@ def upload():
             submitted_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect("/")
             #return redirect(url_for('uploaded_file', filename=filename))
-'''
+
 @app.route('/')
 def hello_world():
   return '''
