@@ -1,8 +1,13 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for
+from werkzeug import secure_filename
 from app import app
 import os
 app = Flask(__name__)
+UPLOAD_FOLDER = '/upload'
+ALLOWED_EXTENSIONS = set(['doc', 'docx'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 @app.route('/upload', methods=['POST'])
 def upload():
