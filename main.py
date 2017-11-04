@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, url_for
 from app import app
 import os
 app = Flask(__name__)
-@app.route('/', methods=['GET', 'POST'])
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if request.method == 'POST':
