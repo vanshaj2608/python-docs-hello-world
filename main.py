@@ -1,10 +1,5 @@
 from flask import Flask
 app = Flask(__name__)
-document = UploadSet('photos', IMAGES)
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST' and 'document' in request.files:
-        filename = document.save(request.files['document'])
 @app.route('/')
 def hello_world():
   return '''
