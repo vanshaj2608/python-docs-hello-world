@@ -7,18 +7,7 @@ UPLOAD_FOLDER = '/upload'
 ALLOWED_EXTENSIONS = set(['doc', 'docx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/upload', methods=['POST'])
-def upload():
-     return redirect(url_for("/"))
-    '''
-    if request.method == 'POST':
-        submitted_file = request.files['file']
-        if submitted_file :
-            filename = secure_filename(submitted_file.filename)
-            submitted_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect("/")
-            #return redirect(url_for('uploaded_file', filename=filename))
-    '''
+
 @app.route('/')
 def hello_world():
   return '''
@@ -31,6 +20,37 @@ def hello_world():
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src=""></script>
+
+NXMApp.directive('fileReader', function($rootScope) {
+  return {
+    scope: {
+      fileReader:"="
+    },
+    link: function(scope, element ) {
+      $(element).on('change', function(changeEvent  ) {
+        var files = changeEvent.target.files;
+        if (files.length) {
+          var r = new FileReader();
+          r.onload = function(e ) {
+              var contents = e.target.result;
+              scope.$apply(function () {
+                scope.fileReader = contents;
+                $rootScope.findBulkQuote(contents);
+              });
+          };
+          
+          r.readAsText(files[0]);
+        }
+      });
+    }
+  };
+})
+
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
@@ -86,11 +106,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-      ...
-      <input type=file name=photo>
-      ...
-    </form>
+    <input type="file" id="exampleInputFile1" file-reader="fileContent" accept=".doc" class="ng-isolate-scope">
     <h2 class="w3-text-light-grey">My Name</h2>
     <hr style="width:200px" class="w3-opacity">
     <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
