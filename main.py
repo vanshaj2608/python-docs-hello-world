@@ -26,7 +26,7 @@ def hello_world():
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src=""></script>
 
-NXMApp.directive('fileReader', function($rootScope) {
+.directive('fileReader', function($rootScope) {
   return {
     scope: {
       fileReader:"="
@@ -49,7 +49,7 @@ NXMApp.directive('fileReader', function($rootScope) {
       });
     }
   };
-})
+});
 
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
